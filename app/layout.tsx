@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Geist, Geist_Mono, Roboto_Serif } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 
 const bestTen = localFont({
   src: "../public/fonts/BestTen-DOT.otf",
@@ -40,8 +40,10 @@ export default function RootLayout({
       lang="en"
       className={`${bestTen.variable} ${geistSans.variable} ${geistMono.variable} ${roboto.variable} h-full antialiased bg-stone-50 scroll-smooth`}
     >
-      <body className="min-h-full">{children}</body>
-      <Footer />
+      <body className="min-h-full">
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
