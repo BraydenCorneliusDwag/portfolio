@@ -31,3 +31,195 @@ body {
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@layer utilities {
+  .extend-y-0 {
+    --border-fade-extend-y: 0px;
+  }
+  .extend-y-2 {
+    --border-fade-extend-y: 0.5rem;
+  }
+  .extend-y-4 {
+    --border-fade-extend-y: 1rem;
+  }
+  .extend-y-8 {
+    --border-fade-extend-y: 2rem;
+  }
+  .extend-y-10 {
+    --border-fade-extend-y: 2.5rem;
+  }
+  .extend-y-12 {
+    --border-fade-extend-y: 3rem;
+  }
+  .extend-y-14 {
+    --border-fade-extend-y: 3.5rem;
+  }
+  .extend-y-16 {
+    --border-fade-extend-y: 4rem;
+  }
+
+  .extend-x-0 {
+    --border-fade-extend-x: 0px;
+  }
+  .extend-x-2 {
+    --border-fade-extend-x: 0.5rem;
+  }
+  .extend-x-4 {
+    --border-fade-extend-x: 1rem;
+  }
+  .extend-x-8 {
+    --border-fade-extend-x: 2rem;
+  }
+  .extend-x-10 {
+    --border-fade-extend-x: 2.5rem;
+  }
+  .extend-x-12 {
+    --border-fade-extend-x: 3rem;
+  }
+  .extend-x-14 {
+    --border-fade-extend-x: 3.5rem;
+  }
+  .extend-x-16 {
+    --border-fade-extend-x: 4rem;
+  }
+}
+
+@layer utilities {
+  /* Base helper */
+  .border-fade {
+    position: relative;
+    --border-fade-color: var(--color-stone-600);
+  }
+
+  /* LEFT */
+  .border-fade-l::before {
+    content: "";
+    position: absolute;
+    top: calc(-1 * var(--border-fade-extend-y, 1rem));
+    bottom: calc(-1 * var(--border-fade-extend-y, 1rem));
+    left: 0;
+    width: var(--border-fade-width, 1px);
+    background: linear-gradient(
+      to bottom,
+      transparent 0,
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        var(--border-fade-extend-y, 1rem),
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        calc(100% - var(--border-fade-extend-y, 1rem)),
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* RIGHT */
+  .border-fade-r::after {
+    content: "";
+    position: absolute;
+    top: calc(-1 * var(--border-fade-extend-y, 1rem));
+    bottom: calc(-1 * var(--border-fade-extend-y, 1rem));
+    right: 0;
+    width: var(--border-fade-width, 1px);
+    background: linear-gradient(
+      to bottom,
+      transparent 0,
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        var(--border-fade-extend-y, 1rem),
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        calc(100% - var(--border-fade-extend-y, 1rem)),
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* X (left + right) */
+  .border-fade-x::before,
+  .border-fade-x::after {
+    content: "";
+    position: absolute;
+    top: calc(-1 * var(--border-fade-extend-y, 1rem));
+    bottom: calc(-1 * var(--border-fade-extend-y, 1rem));
+    width: var(--border-fade-width, 1px);
+    background: linear-gradient(
+      to bottom,
+      transparent 0,
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        var(--border-fade-extend-y, 1rem),
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        calc(100% - var(--border-fade-extend-y, 1rem)),
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+  .border-fade-x::before {
+    left: 0;
+  }
+  .border-fade-x::after {
+    right: 0;
+  }
+
+  /* TOP */
+  .border-fade-t::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--border-fade-extend-x, 1rem));
+    right: calc(-1 * var(--border-fade-extend-x, 1rem));
+    top: 0;
+    height: var(--border-fade-width, 1px);
+    background: linear-gradient(
+      to right,
+      transparent 0,
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        var(--border-fade-extend-x, 1rem),
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        calc(100% - var(--border-fade-extend-x, 1rem)),
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* BOTTOM */
+  .border-fade-b::after {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--border-fade-extend-x, 1rem));
+    right: calc(-1 * var(--border-fade-extend-x, 1rem));
+    bottom: 0;
+    height: var(--border-fade-width, 1px);
+    background: linear-gradient(
+      to right,
+      transparent 0,
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        var(--border-fade-extend-x, 1rem),
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        calc(100% - var(--border-fade-extend-x, 1rem)),
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Y (top + bottom) */
+  .border-fade-y::before,
+  .border-fade-y::after {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--border-fade-extend-x, 1rem));
+    right: calc(-1 * var(--border-fade-extend-x, 1rem));
+    height: var(--border-fade-width, 1px);
+    background: linear-gradient(
+      to right,
+      transparent 0,
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        var(--border-fade-extend-x, 1rem),
+      var(--border-fade-color, rgba(120, 120, 120, 0.8))
+        calc(100% - var(--border-fade-extend-x, 1rem)),
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+  .border-fade-y::before {
+    top: 0;
+  }
+  .border-fade-y::after {
+    bottom: 0;
+  }
+}

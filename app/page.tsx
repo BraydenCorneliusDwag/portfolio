@@ -5,13 +5,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Nav from "@/components/nav";
 import { RoadSign } from "@/components/road-sign";
-import { Skyscrapers } from "@/components/skyscrapers";
 
 const Header = (props: { anchor: string; children: React.ReactNode }) => {
   return (
     <h3
       id={props.anchor}
-      className="text-center text-2xl font-bold font-pixel pb-2 pt-12"
+      className="text-left text-3xl font-bold font-pixel pb-6 -ml-6 pt-12"
     >
       {props.children}
     </h3>
@@ -36,12 +35,26 @@ export default function Home() {
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const listItemRefs = useRef<(HTMLLIElement | null)[]>([]);
 
-  // Update ball position whenever activeSection changes
+  function navigate(sectionName: string) {
+    setActiveSection(sectionName);
+
+    // now trigger scroll to section (mimic href)
+    const el = sectionRefs.current[sectionName];
+    // since we are determining active via offsetTop + el.offsetHeight / 2, we want to scroll to that point as well for perfect centering
+    if (el) {
+      window.scrollTo({
+        top: el.offsetTop - el.offsetHeight / 2 + window.innerHeight / 2,
+        behavior: "smooth",
+      });
+    }
+  }
+
+  // Update arrow position whenever activeSection changes
   useEffect(() => {
     const index = sections.findIndex((s) => s.name === activeSection);
     const el = listItemRefs.current[index];
     if (el) {
-      // Center ball on the list item's vertical midpoint
+      // Center arrow on the list item's vertical midpoint
       setBallTop(el.offsetTop + el.offsetHeight / 2 - 6);
     }
   }, [activeSection]);
@@ -58,11 +71,11 @@ export default function Home() {
           }
         });
       },
-      { rootMargin: "-50% 0px -50% 0px" }
+      { rootMargin: "-50% 0px -50% 0px" },
     );
 
     Object.values(sectionRefs.current).forEach(
-      (el) => el && observer.observe(el)
+      (el) => el && observer.observe(el),
     );
 
     return () => observer.disconnect();
@@ -73,7 +86,8 @@ export default function Home() {
       <div className="relative flex flex-col min-h-screen flex-1 font-sans">
         <Nav />
         <header className="flex flex-row min-h-[65vh] h-full px-32 w-full">
-          <main className="border-x-[0.1rem] border-stone-600 w-full grid grid-cols-2 gap-32 place-items-end justify-items-center">
+          {/* border-x-[0.1rem] border-stone-600 */}
+          <main className="border-fade border-fade-x w-full grid grid-cols-2 gap-32 place-items-end justify-items-center">
             <Image
               src="/hello.png"
               alt="Brayden Mii"
@@ -86,8 +100,8 @@ export default function Home() {
           </main>
         </header>
         <main className="w-full border-t-[0.1rem] border-stone-600 flex flex-col items-center justify-center">
-          <div className="border-x-[0.1rem] border-stone-600 w-11/12 grid grid-cols-3 place-content-center gap-4">
-            <article className="grid col-span-2 place-self-center w-full text-left px-12 border-r-[0.1rem]">
+          <div className="border-fade border-fade-r w-11/12 grid grid-cols-3 place-content-center gap-4">
+            <article className="grid col-span-2 place-self-center w-full text-left pr-12 border-fade border-fade-r ">
               {sections.map((section) => (
                 <section
                   key={section.name}
@@ -114,7 +128,7 @@ export default function Home() {
             <nav className="sticky top-20 h-[calc(100vh-5rem)] flex items-center w-48 px-4">
               <ol className="relative flex flex-col gap-6">
                 <motion.div
-                  className="font-pixel absolute left-[-20px] font-pixel text-sm leading-none -mt-0.5"
+                  className="font-pixel absolute -left-5 font-pixel text-sm leading-none -mt-0.5"
                   animate={{ top: ballTop }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
@@ -127,16 +141,16 @@ export default function Home() {
                       listItemRefs.current[i] = el;
                     }}
                   >
-                    <a
-                      href={section.href}
-                      className={`block transition-colors duration-200 ${
+                    <button
+                      onClick={() => navigate(section.name)}
+                      className={`cursor-pointer block transition-colors duration-200 ${
                         activeSection === section.name
                           ? "font-bold text-black"
                           : "text-stone-500 hover:text-black"
                       }`}
                     >
                       {section.name}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ol>
