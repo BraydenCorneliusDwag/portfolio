@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Roboto_Serif } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/footer";
 import { Rays, Tree } from "@/components/outdoors";
+import Nav from "@/components/nav";
 
 const bestTen = localFont({
   src: "../public/fonts/BestTen-DOT.otf",
@@ -28,7 +29,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Brayden (bdwag) Patrick",
-  description: "Marketing Genius and Lady Killer",
+  description: "Marketing Strategist and Digital Designer",
 };
 
 export default function RootLayout({
@@ -42,6 +43,7 @@ export default function RootLayout({
       className={`${bestTen.variable} ${geistSans.variable} ${geistMono.variable} ${roboto.variable} h-full antialiased bg-stone-50 scroll-smooth`}
     >
       <body className="min-h-full">
+        <Nav />
         {/* <Rays /> */}
         <Tree />
         {children}

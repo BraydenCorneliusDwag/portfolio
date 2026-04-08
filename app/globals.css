@@ -19,6 +19,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.font-pixel {
+  font-family: var(--font-pixel), monospace;
+  image-rendering: pixelated; /* helps with scaling */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-ligatures: none;
+}
+
 @keyframes sway {
   0% {
     transform: rotate(28deg);
@@ -53,13 +61,6 @@ body {
   .font-roboto {
     font-family: var(--font-roboto), sans-serif;
   }
-}
-
-.font-pixel {
-  font-family: var(--font-pixel), monospace;
-  image-rendering: pixelated; /* helps with scaling */
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 @layer utilities {
@@ -251,5 +252,54 @@ body {
   }
   .border-fade-y::after {
     bottom: 0;
+  }
+
+  .border-fade-all {
+    --border-fade-color: var(--color-stone-600);
+    --border-fade-width: 1px;
+
+    position: relative;
+
+    background:
+      /* TOP */
+      linear-gradient(
+          to right,
+          transparent 0,
+          var(--border-fade-color) var(--border-fade-extend-x, 1rem),
+          var(--border-fade-color)
+            calc(100% - var(--border-fade-extend-x, 1rem)),
+          transparent 100%
+        )
+        top / 100% var(--border-fade-width) no-repeat,
+      /* BOTTOM */
+        linear-gradient(
+          to right,
+          transparent 0,
+          var(--border-fade-color) var(--border-fade-extend-x, 1rem),
+          var(--border-fade-color)
+            calc(100% - var(--border-fade-extend-x, 1rem)),
+          transparent 100%
+        )
+        bottom / 100% var(--border-fade-width) no-repeat,
+      /* LEFT */
+        linear-gradient(
+          to bottom,
+          transparent 0,
+          var(--border-fade-color) var(--border-fade-extend-y, 1rem),
+          var(--border-fade-color)
+            calc(100% - var(--border-fade-extend-y, 1rem)),
+          transparent 100%
+        )
+        left / var(--border-fade-width) 100% no-repeat,
+      /* RIGHT */
+        linear-gradient(
+          to bottom,
+          transparent 0,
+          var(--border-fade-color) var(--border-fade-extend-y, 1rem),
+          var(--border-fade-color)
+            calc(100% - var(--border-fade-extend-y, 1rem)),
+          transparent 100%
+        )
+        right / var(--border-fade-width) 100% no-repeat;
   }
 }
