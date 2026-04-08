@@ -35,16 +35,18 @@ export default function Footer() {
               { label: "Where I've Done It", href: "/experience" },
               {
                 label: "Get In Touch",
-                href: "mailto:braydenpatrick@gmail.com",
+                href: "mailto:braydenpatrickmarketing@gmail.com",
               },
             ].map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="font-roboto text-sm text-stone-500 hover:text-black transition-colors"
-              >
-                {link.label}
-              </a>
+              <p key={link.label}>
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="font-roboto text-sm text-stone-500 hover:text-black transition-colors"
+                >
+                  {link.label}
+                </a>
+              </p>
             ))}
           </div>
 
@@ -55,26 +57,26 @@ export default function Footer() {
             </span>
             {[
               {
-                label: "Instagram",
-                href: "https://instagram.com/braydenpatrick",
+                label: "LinkedIn",
+                href: "https://www.linkedin.com/in/brayden-patrick-612a683a7/",
               },
               {
-                label: "LinkedIn",
-                href: "https://linkedin.com/in/braydenpatrick",
+                label: "YouTube",
+                href: "https://youtube.com/@Braydeniskindadumb",
               },
-              { label: "YouTube", href: "https://youtube.com/@braydenpatrick" },
-              { label: "TikTok", href: "https://tiktok.com/@braydenpatrick" },
-              { label: "Twitter / X", href: "https://x.com/braydenpatrick" },
+              { label: "TikTok", href: "https://tiktok.com/@hairypoppins29" },
+              { label: "Twitter / X", href: "https://x.com/braydenkp" },
             ].map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-roboto text-sm text-stone-500 hover:text-black transition-colors"
-              >
-                {social.label}
-              </a>
+              <p key={social.label}>
+                <a
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-roboto text-sm text-stone-500 hover:text-black transition-colors"
+                >
+                  {social.label}
+                </a>
+              </p>
             ))}
           </div>
         </div>
