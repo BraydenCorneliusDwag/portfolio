@@ -1,6 +1,6 @@
 import Nav from "@/components/nav";
 
-export default function Work() {
+export default function What() {
   return (
     <>
       <div className="relative flex flex-col min-h-screen flex-1 font-sans">
